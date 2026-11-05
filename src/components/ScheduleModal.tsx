@@ -3,8 +3,6 @@ import { CalendarDays, CheckCircle2, ChevronLeft, ChevronRight, Clock, X } from 
 import { notifySubmission, supabase, type Appointment } from '@/lib/supabase';
 import { SERVICES } from '@/lib/services';
 
-type ContactMode = 'lead' | 'appointment';
-
 type ScheduleModalProps = {
   open: boolean;
   onClose: () => void;
@@ -54,18 +52,7 @@ export function ScheduleModal({ open, onClose, presetService }: ScheduleModalPro
     };
   }, [open]);
 
-  useEffect(() => {
-    let cancelled = false;
-    void import('animejs').then(({ createLayout }) => {
-      const dialog = dialogRef.current;
-      if (!dialog || cancelled) return;
-      dialog.style.setProperty('--overlay-alpha', '0');
-      layoutRef.current = createLayout(dialog, {
-        children: ['.modal', 'h2', 'h3', 'p'],
-        properties: ['--overlay-alpha'],
-      });
-      setLayoutReady(true);
-    });
+  if (!open) return null;
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -159,6 +146,6 @@ export function ScheduleModal({ open, onClose, presetService }: ScheduleModalPro
           </form>
         )}
       </div>
-    </dialog>
+    </div>
   );
 }

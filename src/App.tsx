@@ -15,6 +15,7 @@ import WhatsAppFloat from '@/components/WhatsAppFloat';
 import { LogoStrip } from '@/components/LogoStrip';
 import { parseHash, type Route } from '@/lib/router';
 import { ProspectosPage } from '@/components/ProspectosPage';
+import { Preloader } from '@/components/Preloader';
 
 function App() {
   const [route, setRoute] = useState<Route>(parseHash());
@@ -39,6 +40,7 @@ function App() {
 
   return (
     <div style={{ minHeight: '100vh', background: 'var(--paper)' }}>
+      <Preloader />
       <Navbar onSchedule={() => openSchedule(undefined)} />
 
       <main>
